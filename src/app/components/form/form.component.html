@@ -1,0 +1,55 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+	<div class="form-input">
+		<label>Імя:</label>
+		<input type="text" name="name" placeholder="Введіть ваше ім'я" formControlName="name">
+		<div *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="validation">
+			<small *ngIf="form.get('name')?.errors?.['required']">
+				Поле має бути правильно заповнене
+			</small>
+			<small *ngIf="form.get('name')?.errors?.['pattern']">
+				Поле має бути правильно заповнене
+			</small>
+		</div>
+	</div>
+	<div class="form-input">
+		<label>Телефон:</label>
+		<input type="tel" name="phone" placeholder="+380976666666" formControlName="phone">
+		<div *ngIf="form.get('phone')?.invalid && form.get('phone')?.touched" class="validation">
+			<small *ngIf="form.get('phone')?.errors?.['required']">
+				Поле має бути правильно заповнене
+			</small>
+			<small *ngIf="form.get('phone')?.errors?.['pattern']">
+				Поле має бути правильно заповнене
+			</small>
+			<small *ngIf="form.get('phone')?.errors?.['minlength']">
+				Не менше 13 символів
+			</small>
+		</div>
+	</div>
+	<div class="form-input">
+		<label>e-mail:</label>
+		<input type="email" name="email" placeholder="Введіть ваш e-mail" formControlName="email">
+		<div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="validation">
+			<small *ngIf="form.get('email')?.errors?.['required']">
+				Поле має бути правильно заповнене
+			</small>
+			<small *ngIf="form.get('email')?.errors?.['email']">
+				Поле має бути правильно заповнене
+			</small>
+		</div>
+	</div>
+	<div class="form-input">
+		<label>Стать:</label>
+		<select name="gender" formControlName="gender">
+			<option value="">Оберіть стать користувача</option>
+			<option value="Чоловік">Чоловік</option>
+			<option value="Жінка">Жінка</option>
+		</select>
+		<div *ngIf="form.get('gender')?.invalid && form.get('gender')?.touched" class="validation">
+			<small *ngIf="form.get('gender')?.errors?.['required']">
+				Поле має бути правильно заповнене
+			</small>
+		</div>
+	</div>
+	<button type="submit">Додати в записник</button>
+</form>

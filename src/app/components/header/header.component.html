@@ -1,0 +1,10 @@
+<div class="header">
+	<h1>Тестове Завдання</h1>
+	<h2>Останній доданий клієнт: <br>
+	<b *ngIf="lastUser$ | async as lastUser; else noUsers">{{lastUser.name}}</b>
+	<ng-template #noUsers>
+		<b>ще не додано</b>
+	</ng-template>
+
+	</h2>
+</div>

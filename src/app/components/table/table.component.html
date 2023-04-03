@@ -1,0 +1,22 @@
+<div>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th class="sortable" (click)="sort('name')" [ngClass]="{ 'asc': sortBy === 'name' && sortDirection === 'asc', 'desc': sortBy === 'name' && sortDirection === 'desc' }">Імя</th>
+        <th class="sortable" (click)="sort('phone')" [ngClass]="{ 'asc': sortBy === 'phone' && sortDirection === 'asc', 'desc': sortBy === 'phone' && sortDirection === 'desc' }">Телефон</th>
+        <th class="sortable" (click)="sort('email')" [ngClass]="{ 'asc': sortBy === 'email' && sortDirection === 'asc', 'desc': sortBy === 'email' && sortDirection === 'desc' }">e-mail</th>
+        <th class="sortable" (click)="sort('gender')" [ngClass]="{ 'asc': sortBy === 'gender' && sortDirection === 'asc', 'desc': sortBy === 'gender' && sortDirection === 'desc' }">Стать</th>
+        <th>Дія</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let user of users$ | async">
+				<td>{{user.name}}</td>
+				<td>{{user.phone}}</td>
+				<td>{{user.email}}</td>
+				<td>{{user.gender}}</td>
+				<td><button (click)="deleteUser(user.phone)">Видалити</button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

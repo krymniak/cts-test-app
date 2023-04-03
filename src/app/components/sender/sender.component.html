@@ -1,0 +1,6 @@
+
+<div class="sender">
+	<textarea #jsonInput>{{displayedUsers$ | async | json}}</textarea>
+	<button (click)="getUsers()">Отримати клієнтів з JSON</button>
+	<button [disabled]="!(users$ | async)?.length" (click)="createJson()">Зформувати JSON для відправки</button>
+</div>
