@@ -20,17 +20,16 @@ export class SenderComponent {
 	getUsers() {
 		const jsonArray = JSON.parse(this.jsonInput.nativeElement.value)
 		const users = jsonArray
-		console.log(users)
 		this.service.users$.next(users)
 		this.displayedUsers$.next([])
+		this.jsonInput.nativeElement.value = []
 		this.service.lastUser$.next(users[users.length - 1])
 	}
 	createJson() {
 		const users = this.service.users$.getValue()
-		console.log(users)
 		this.displayedUsers$.next(users)
-		const user2 = this.displayedUsers$.getValue()
-		console.log(user2)
+		const myJsonString = JSON.stringify(users);
+		this.jsonInput.nativeElement.value = myJsonString
 	}
 
 }
