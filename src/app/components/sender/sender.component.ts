@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
-import { User } from 'src/app/interfaces';
+import { FormControl, FormGroup} from '@angular/forms';
 import { CtsService } from 'src/app/services/cts.servise';
 import { jsonArrayValidator } from './json.validator';
 
@@ -10,35 +8,32 @@ import { jsonArrayValidator } from './json.validator';
 	templateUrl: './sender.component.html',
 	styleUrls: ['./sender.component.scss']
 })
-export class SenderComponent implements OnInit{
+export class SenderComponent implements OnInit {
 
 	form!: FormGroup;
 
-	users$ = this.service.users$.asObservable()
-	displayedUsers$ = new BehaviorSubject<User[] | null>([])
-	constructor(private service: CtsService) {
-  }
+	users$ = this._service.users$.asObservable();
+	constructor(private _service: CtsService) {
+	}
 
 	ngOnInit(): void {
 		this.form = new FormGroup({
-			jsonArray: new FormControl(JSON.stringify(this.service.users), [jsonArrayValidator()])
+			jsonArray: new FormControl(JSON.stringify(this._service.users), [jsonArrayValidator()])
 		})
 	}
-	
+
 
 	getUsers() {
-		const jsonArray = JSON.parse(this.form.value.jsonArray)
-		const users = jsonArray
-		this.service.users$.next(users)
-		this.displayedUsers$.next([])
-		this.form.setValue({jsonArray: []})
-		this.service.lastUser$.next(users[users.length - 1])
+		const jsonArray = JSON.parse(this.form.value.jsonArray);
+		const users = jsonArray;
+		this._service.users$.next(users);
+		this.form.setValue({ jsonArray: [] });
+		this._service.lastUser$.next(users[users.length - 1]);
 	}
 	createJson() {
-		const users = this.service.users$.getValue()
-		this.displayedUsers$.next(users)
+		const users = this._service.users$.getValue();
 		const myJsonString = JSON.stringify(users);
-		this.form.setValue({jsonArray: myJsonString})
+		this.form.setValue({ jsonArray: myJsonString });
 	}
 
 }

@@ -7,15 +7,15 @@ import { CtsService } from 'src/app/services/cts.servise';
 	styleUrls: ['./table.component.scss']
 })
 export class TableComponent {
-	users$ = this.service.users$.asObservable();
+	users$ = this._service.users$.asObservable();
 	sortDirection = 'asc';
 	sortBy = '';
 
-	constructor(private service: CtsService) {
+	constructor(private _service: CtsService) {
 	}
 
 	deleteUser(phone: string) {
-		this.service.deleteUser(phone)
+		this._service.deleteUser(phone)
 	}
 
 	sort(field: string) {
@@ -26,7 +26,7 @@ export class TableComponent {
 			this.sortDirection = 'asc';
 		}
 
-		const sortedUsers = this.service.users$.getValue().sort((a, b) => {
+		this._service.users$.getValue().sort((a, b) => {
 			const aValue = a[field];
 			const bValue = b[field];
 

@@ -9,14 +9,14 @@ import { CtsService } from 'src/app/services/cts.servise';
 	styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-	form!: FormGroup
+	form!: FormGroup;
 
-	constructor(private service: CtsService) {
+	constructor(private _service: CtsService) {
 
 	}
 
 	ngOnInit(): void {
-		this.createForm()
+		this.createForm();
 	}
 
 	createForm() {
@@ -32,9 +32,9 @@ export class FormComponent implements OnInit {
 	submit() {
 		if (this.form.invalid) {
 			Object.values(this.form.controls).forEach(control => {
-				control.markAsTouched()
+				control.markAsTouched();
 			})
-			return
+			return;
 		}
 		const user: User = {
 			name: this.form.value.name,
@@ -42,8 +42,8 @@ export class FormComponent implements OnInit {
 			email: this.form.value.email,
 			gender: this.form.value.gender
 		}
-		this.service.addUser(user)
-		this.service.lastUser$.next(user)
-		this.form.reset()
+		this._service.addUser(user);
+		this._service.lastUser$.next(user);
+		this.form.reset();
 	}
 }
