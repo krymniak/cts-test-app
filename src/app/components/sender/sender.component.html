@@ -1,6 +1,24 @@
 
 <div class="sender">
-	<textarea #jsonInput>{{displayedUsers$ | async | json}}</textarea>
-	<button (click)="getUsers()">Отримати клієнтів з JSON</button>
+	<form [formGroup]="form">
+		<div class="input">
+			<textarea name="jsonArray" formControlName="jsonArray"></textarea>
+			<div *ngIf="form.get('jsonArray')?.invalid" class="validation">
+				<small *ngIf="form.get('jsonArray')?.errors?.['emptyValue']">
+					Поле має бути правильно заповнене
+				</small>
+				<small *ngIf="form.get('jsonArray')?.errors?.['invalidJsonArray']">
+					Поле має бути правильно заповнене
+				</small>
+				<small *ngIf="form.get('jsonArray')?.errors?.['invalidJsonObject']">
+					Поле має бути правильно заповнене
+				</small>
+				<small *ngIf="form.get('jsonArray')?.errors?.['invalidJson']">
+					Поле має бути правильно заповнене
+				</small>
+			</div>
+		</div>
+	</form>
+	<button [disabled]="form.invalid" (click)="getUsers()">Отримати клієнтів з JSON</button>
 	<button [disabled]="!(users$ | async)?.length" (click)="createJson()">Зформувати JSON для відправки</button>
 </div>
